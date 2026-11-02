@@ -1,12 +1,20 @@
 #Soy capitan clark y estos son mis backrooms
 items = []
 room =0
+def tiene_item(it):
+  encontrado = False
+  for item in items:
+    if it == item:
+      encontrado = True
+      return True
+  if encontrado == False:
+    return False
 while 1:
   print("======MINIROOMS======")
   print("MENU")
   print("* Jugar")
   print("* Salir")
-  menu_op=input("Seleciona una opcion").lower()
+  menu_op=input("Seleciona una opcion: ").lower()
   if menu_op == "jugar":
     break
   elif menu_op == "salir":
@@ -17,16 +25,13 @@ while 1:
     print("tienes 2 pasillos a la izquierda y la derecha")
     print("* Izquierda")
     print("* Derecha")
-    seleccion = input("A donde iras?").lower()
+    seleccion = input("A donde iras?: ").lower()
     if seleccion == "izquierda":
       room = 1
     if seleccion == "derecha":
       room = 2
   if room == 1:
-    buscado = "llave"
-    encontrado = False
-    for item in items:
-      if buscado == item:
+    if tiene_item("llave") == True:
         print("Llegas al final del pasillo, solo hay... soledad?")
         print("* llorar")
         print("* irse")
@@ -35,8 +40,7 @@ while 1:
           print("Se ha mojado el suelo con tus lagrimas")
         elif seleccion == "irse":
           room = 0
-        encontrado = True
-    if encontrado == False:
+    if not tiene_item("llave") == True:
       print("Llegas al final del pasillo, solo hay una llave y soledad")
       print("* recoger llave")
       print("* irse")
@@ -49,10 +53,7 @@ while 1:
         room = 0
   if room == 2:
     print("llegas al final donde hay una puerta cerrada y otra bifurcacion a la izquierda")
-    buscado = "llave"
-    encontrado = False
-    for item in items:
-      if buscado == item:
+    if tiene_item("llave") == True:
         print("que bueno que tienes una llave")
         print("* abrir puerta")
         print("* ir a la izquierda")
@@ -64,8 +65,7 @@ while 1:
             room = 0
         elif "izquierda" in seleccion:
           room = 3
-      encontrado = True
-    if encontrado == False:
+    if not tiene_item("llave") == True:
       print("* ir a la izquierda")
       print("* regresar")
       seleccion = input().lower()
@@ -77,7 +77,7 @@ while 1:
     print("Llegas al final del pasillo, solo hay... soledad?")
     print("* llorar")
     print("* irse")
-    seleccion = input()
+    seleccion = input().lower()
     if seleccion == "llorar":
         print("Se ha mojado el suelo con tus lagrimas")
     elif seleccion == "irse":
@@ -95,17 +95,9 @@ while 1:
     if seleccion == "derecha":
       room = 7
   if room == 5:
-    buscado = "moneda" 
     encontrado = False
     for item in items:
-      if buscado == item:
-        print("Llegaste al final del pasillo, encuentras soledad")
-        room = 4
-        encontrado = True
-    buscado = "llave2" 
-    encontrado = False
-    for item in items:
-      if buscado == item:
+      if "moneda" == item or "llave2" == item:
         print("Llegaste al final del pasillo, encuentras soledad")
         room = 4
         encontrado = True
@@ -122,5 +114,13 @@ while 1:
         print("moneda recogida!")
         items.append("moneda")
         room = 4
-    
+  if room == 6:
+    print("Llegas al final del pasillo, solo hay... soledad?")
+    print("* llorar")
+    print("* irse")
+    seleccion = input().lower()
+    if seleccion == "llorar":
+        print("Se ha mojado el suelo con tus lagrimas")
+    elif seleccion == "irse":
+        room = 4
       

@@ -22,12 +22,12 @@ while 1:
   print("7. Salir")
   
   try:
-    opcion = int(input("ingrese indice de opcion (numero):"))
+    opcion = int(input("ingrese indice de opcion (numero): "))
     if opcion == 1:
       while 1:
-        inn = input("Nombre del ingreso?").lower()
+        inn = input("Nombre del ingreso?: ").lower()
         try:
-          inv = float(input("Valor del ingreso?"))
+          inv = float(input("Valor del ingreso?: "))
         except ValueError:
           print("monto invalido")
           continue
@@ -36,9 +36,9 @@ while 1:
       ingreso_add(inn,inv)
     if opcion == 2:
       while 1:
-        gn = input("Nombre del gasto?").lower()
+        gn = input("Nombre del gasto?: ").lower()
         try:
-          gv = float(input("Valor del gasto?"))
+          gv = float(input("Valor del gasto?: "))
         except ValueError:
           print("monto invalido")
           continue
@@ -50,7 +50,7 @@ while 1:
     if opcion == 4:
       print(ingresos)
     if opcion == 5:  
-      buscado = input("Nombre del gasto a buscar?").lower()
+      buscado = input("Nombre del gasto a buscar?: ").lower()
       encontrado = False
       for nombre,valor in gastos:
         if buscado == nombre:
@@ -61,7 +61,7 @@ while 1:
         print("No existe")
          
     if opcion == 6:  
-      buscado = input("Nombre del ingreso a buscar?").lower()
+      buscado = input("Nombre del ingreso a buscar?: ").lower()
       encontrado = False
       for nombre,valor in ingresos:
         if buscado == nombre:
