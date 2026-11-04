@@ -2,125 +2,151 @@
 items = []
 room =0
 def tiene_item(it):
-  encontrado = False
-  for item in items:
-    if it == item:
-      encontrado = True
-      return True
-  if encontrado == False:
-    return False
+  return it in items
 while 1:
-  print("======MINIROOMS======")
-  print("MENU")
-  print("* Jugar")
-  print("* Salir")
-  menu_op=input("Seleciona una opcion: ").lower()
-  if menu_op == "jugar":
-    break
-  elif menu_op == "salir":
-    quit()
-while 1:
-  if room == 0:
-    print("Despiertas en una habitacion con tapizado amarillo y aspecto de oficina")
-    print("tienes 2 pasillos a la izquierda y la derecha")
-    print("* Izquierda")
-    print("* Derecha")
-    seleccion = input("A donde iras?: ").lower()
-    if seleccion == "izquierda":
-      room = 1
-    if seleccion == "derecha":
-      room = 2
-  if room == 1:
-    if tiene_item("llave") == True:
-        print("Llegas al final del pasillo, solo hay... soledad?")
-        print("* llorar")
+  items = []
+  room = 0
+  while 1:
+    print("======MINIROOMS======")
+    print("MENU")
+    print("* Jugar")
+    print("* Salir")
+    menu_op=input("Seleciona una opcion: ").lower()
+    if menu_op == "jugar":
+      break
+    elif menu_op == "salir":
+      quit()
+  while 1:
+    if room == 0:
+      print("Despiertas en una habitacion con tapizado amarillo y aspecto de oficina")
+      print("tienes 2 pasillos a la izquierda y la derecha")
+      print("* Izquierda")
+      print("* Derecha")
+      seleccion = input("A donde iras?: ").lower()
+      if seleccion == "izquierda":
+        room = 1
+      if seleccion == "derecha":
+        room = 2
+    if room == 1:
+      if tiene_item("llave"):
+          print("Llegas al final del pasillo, solo hay... soledad?")
+          print("* llorar")
+          print("* irse")
+          seleccion = input().lower()
+          if seleccion == "llorar":
+            print("Se ha mojado el suelo con tus lagrimas")
+          elif seleccion == "irse":
+            room = 0
+      if not tiene_item("llave"):
+        print("Llegas al final del pasillo, solo hay una llave y soledad")
+        print("* recoger llave")
         print("* irse")
         seleccion = input().lower()
-        if seleccion == "llorar":
-          print("Se ha mojado el suelo con tus lagrimas")
+        if "llave" in seleccion:
+          print("llave recogida!")
+          items.append("llave")
+          room = 0
         elif seleccion == "irse":
           room = 0
-    if not tiene_item("llave") == True:
-      print("Llegas al final del pasillo, solo hay una llave y soledad")
-      print("* recoger llave")
-      print("* irse")
-      seleccion = input().lower()
-      if "llave" in seleccion:
-        print("llave recogida!")
-        items.append("llave")
-        room = 0
-      elif seleccion == "irse":
-        room = 0
-  if room == 2:
-    print("llegas al final donde hay una puerta cerrada y otra bifurcacion a la izquierda")
-    if tiene_item("llave") == True:
-        print("que bueno que tienes una llave")
-        print("* abrir puerta")
+    if room == 2:
+      print("llegas al final donde hay una puerta cerrada y otra bifurcacion a la izquierda")
+      if tiene_item("llave"):
+          print("que bueno que tienes una llave")
+          print("* abrir puerta")
+          print("* ir a la izquierda")
+          print("* regresar")
+          seleccion = input().lower()
+          if seleccion == "abrir puerta":
+            room = 4
+          elif seleccion == "regresar":
+              room = 0
+          elif "izquierda" in seleccion:
+            room = 3
+      if not tiene_item("llave"):
         print("* ir a la izquierda")
         print("* regresar")
         seleccion = input().lower()
-        if seleccion == "abrir puerta":
-          room = 4
-        elif seleccion == "regresar":
+        if seleccion == "regresar":
             room = 0
         elif "izquierda" in seleccion:
-          room = 3
-    if not tiene_item("llave") == True:
-      print("* ir a la izquierda")
-      print("* regresar")
+            room = 3
+    if room == 3:
+      print("Llegas al final del pasillo, solo hay... soledad?")
+      print("* llorar")
+      print("* irse")
       seleccion = input().lower()
-      if seleccion == "regresar":
-          room = 0
-      elif "izquierda" in seleccion:
-          room = 3
-  if room == 3:
-    print("Llegas al final del pasillo, solo hay... soledad?")
-    print("* llorar")
-    print("* irse")
-    seleccion = input().lower()
-    if seleccion == "llorar":
-        print("Se ha mojado el suelo con tus lagrimas")
-    elif seleccion == "irse":
-        room = 2
-  if room == 4: 
-    print("tienes 3 pasillos de frente, a la izquierda y la derecha")
-    print("* Izquierda")
-    print("* De frente")
-    print("* Derecha")
-    seleccion = input().lower()
-    if seleccion == "de frente":
-      room = 5
-    if seleccion == "izquierda":
-      room = 6
-    if seleccion == "derecha":
-      room = 7
-  if room == 5:
-    encontrado = False
-    for item in items:
-      if "moneda" == item or "llave2" == item:
-        print("Llegaste al final del pasillo, encuentras soledad")
-        room = 4
-        encontrado = True
-    if encontrado == False:
-      print("Llegaste al final del pasillo, encuentras una moneda y una llave")
-      print("* Coger llave")
-      print("* Coger moneda")
+      if seleccion == "llorar":
+          print("Se ha mojado el suelo con tus lagrimas")
+      elif seleccion == "irse":
+          room = 2
+    if room == 4: 
+      print("tienes 3 pasillos de frente, a la izquierda y la derecha")
+      print("* Izquierda")
+      print("* De frente")
+      print("* Derecha")
       seleccion = input().lower()
-      if "llave" in seleccion:
-        print("llave recogida!")
-        items.append("llave2")
-        room = 4
-      if "moneda" in seleccion:
-        print("moneda recogida!")
-        items.append("moneda")
-        room = 4
-  if room == 6:
-    print("Llegas al final del pasillo, solo hay... soledad?")
-    print("* llorar")
-    print("* irse")
-    seleccion = input().lower()
-    if seleccion == "llorar":
-        print("Se ha mojado el suelo con tus lagrimas")
-    elif seleccion == "irse":
-        room = 4
+      if seleccion == "de frente":
+        room = 5
+      elif seleccion == "izquierda":
+        room = 6
+      elif seleccion == "derecha":
+        room = 7
+    if room == 5:
+      encontrado = False
+      for item in items:
+        if "moneda" == item or "llave2" == item:
+          print("Llegaste al final del pasillo, encuentras soledad")
+          room = 4
+          encontrado = True
+      if encontrado == False:
+        print("Llegaste al final del pasillo, encuentras una moneda y una llave")
+        print("* Coger llave")
+        print("* Coger moneda")
+        seleccion = input().lower()
+        if "llave" in seleccion:
+          print("llave recogida!")
+          items.append("llave2")
+          room = 4
+        if "moneda" in seleccion:
+          print("moneda recogida!")
+          items.append("moneda")
+          room = 4
+    if room == 6:
+      print("Llegas al final del pasillo, solo hay... soledad?")
+      print("* llorar")
+      print("* irse")
+      seleccion = input().lower()
+      if seleccion == "llorar":
+          print("Se ha mojado el suelo con tus lagrimas")
+      elif seleccion == "irse":
+          room = 4
+    if room == 7:
+      print("Tienes una puerta y una maquina expendedora aqui")
+      if tiene_item("llave2") == True:
+        print("* Entrar a la puerta")
+      if tiene_item("moneda") == True:
+        print("* Usar maquina")
+      seleccion = input().lower()
+  
+      if "puerta" in seleccion and tiene_item("llave2"):
+        room = 8
+      elif "maquina" in seleccion and tiene_item("moneda"):
+        room = 9
+    if room == 8:
+      print("entras al cuarto y no encuentras nada")
+      print("La puerta se ha cerrado detras tuyo")
+      print("no hay escapatoria")
+      print("======GAME OVER=======")
+      print("Bad Ending")
+      print("======================")
+      break
+    if room == 9:
+      print("Se abre una compuerta secreta y entras")
+      print("ENCUENTRAS LA SALIDA!!!!")
+      print("no hay escapatoria")
+      print("======GAME OVER=======")
+      print("Good Ending")
+      print("======================")
+      break
+      
       
