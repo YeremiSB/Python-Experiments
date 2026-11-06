@@ -33,11 +33,11 @@ class CuentaBancaria:
   @property
   def saldo(self):
       return self.__saldo
-  class CuentaAhorros(CuentaBancaria):
-    def __init__(self, titular):
-      super().__init__(self.titular)
-    def tasa_interes(self):
-      interes = self.saldo * 0.02
-      return interes
-    def aplicar_interes(self):
-      self.depositar(self.tasa_interes(self))
+class CuentaAhorros(CuentaBancaria):
+  def __init__(self, titular):
+    super().__init__(titular)
+  def tasa_interes(self):
+    interes = self.saldo * 0.02
+    return interes
+  def aplicar_interes(self):
+    self.depositar(self.tasa_interes())
