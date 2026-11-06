@@ -41,3 +41,22 @@ class CuentaAhorros(CuentaBancaria):
     return interes
   def aplicar_interes(self):
     self.depositar(self.tasa_interes())
+
+  def retirar(self, cantidad):
+    try:
+      cantidad = float(cantidad)
+      if self.saldo < 100 or cantidad > self.saldo or cantidad <= 0 or self.saldo - cantidad < 100:
+        print("Falta saldo para esta operacion")
+      else:
+        super().retirar(cantidad)  
+    except ValueError:
+     print("Saldo Invalido, intente de nuevo")
+
+cuenta = CuentaAhorros("Yeremi")
+cuenta.depositar(500)
+
+cuenta.retirar(400)
+print(cuenta.saldo)
+
+cuenta.retirar(1)
+print(cuenta.saldo)
