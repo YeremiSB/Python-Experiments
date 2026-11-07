@@ -51,12 +51,3 @@ class CuentaAhorros(CuentaBancaria):
         super().retirar(cantidad)  
     except ValueError:
      print("Saldo Invalido, intente de nuevo")
-
-cuenta = CuentaAhorros("Yeremi")
-cuenta.depositar(500)
-
-cuenta.retirar(400)
-print(cuenta.saldo)
-
-cuenta.retirar(1)
-print(cuenta.saldo)
