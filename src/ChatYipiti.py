@@ -1,8 +1,7 @@
-#v.0.6
+#v.1.0
 import json
 import os
 from openrouter import OpenRouter
-from openrouter import ResponseValidationError
 sys_prompt = {"role": "system", "content": "Eres CHATYIPITI, una interfaz multimodelo (si en algun momento encuentras que dijiste que eras un modelo que no eres, esta es la razon) tu principal objetivo es responder a las cuestiones del usuario, puedes decir con normalidad que modelo corre debajo (ejem. qwen)"}
 confg_loc = {
     "api_key": "",
@@ -14,11 +13,16 @@ def guardar_chat():
 def configuracion():
   with open("confg.json", "w", encoding="utf-8") as confg:
     json.dump(confg_loc, confg)
-if os.path.exists("confg.json"):
+def load_configuracion():
   with open("confg.json", "r", encoding="utf-8") as confg:
     confg = json.load(confg) 
     first_t = confg["api_key"]
     mod = confg["default_model"]
+    return confg
+if os.path.exists("confg.json"):
+  confg_loc = load_configuracion()
+  first_t = confg_loc["api_key"]
+  mod = confg_loc["default_model"]
 else:
   mod = "qwen/qwen3.8-omni-flash"
   first_t = input("ingrese su apikey de ai.hackclub.com: ")
@@ -27,18 +31,19 @@ else:
 while 1: 
   try:
     client = OpenRouter(
-  api_key = first_t ,
-  server_url = "https://ai.hackclub.com/proxy/v1")
+    api_key = first_t ,
+    server_url = "https://ai.hackclub.com/proxy/v1")
     response = client.chat.send(
       model= "qwen/qwen3-32b",
       messages= [{"role": "system", "content": "send OK"}],
       stream=False,
       )
-  except ResponseValidationError:
+  except:
     first_t = input("ingrese su apikey de ai.hackclub.com: ")
     continue
   else:
     confg_loc["api_key"] = first_t
+    configuracion()
     break
 if os.path.exists("history.json"):
   with open("history.json", "r", encoding="utf-8") as old_chat:
@@ -64,7 +69,6 @@ while 1:
     print("Escoja un modelo de la siguiente lista")
     print("1. ChatGPT 5.6-Sol")
     print("2. Gemini 3.5 flash")
-    print("/e : salir")
     print("3. Qwen 3.8")
     print("4. Claude Sonnet 5.5")
     try:
