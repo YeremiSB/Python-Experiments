@@ -4,6 +4,10 @@ from tkinter import messagebox
 from tkinter import Tk
 from tkinter import ttk
 
+class Ventana:
+	def __init__(self):
+		self.ventana = Tk()
+
 ventana = Tk()
 ventana.title("MicroBlog")
 
