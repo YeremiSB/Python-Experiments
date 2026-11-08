@@ -3,6 +3,7 @@ Python-Experiments is a suite consisting of small Python programs created as pra
 # Projects
 - Main: the main manager
 - Chat-Yipiti: a multi-model interface that uses the ai.hackclub.com API, featuring models such as Claude, ChatGPT, Gemini, and Qwen
+- MicroBlog : a text-editor made in Tkinter
 - Minirooms: a console line videogame
 - Bast-Ultra-Mini: finance gestor
 - Calc: a calculator
